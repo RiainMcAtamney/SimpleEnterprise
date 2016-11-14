@@ -2,10 +2,8 @@
 using MySample.Business;
 using MySample.Services;
 using MySample.Web.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MySample.Web.Controllers
@@ -16,7 +14,7 @@ namespace MySample.Web.Controllers
         private readonly IProductService productService;
 
         public HomeController(ICompanyService companyService, IProductService productService)
-        {
+        {             
             this.companyService = companyService;
             this.productService = productService;
         }
@@ -48,22 +46,26 @@ namespace MySample.Web.Controllers
         [HttpPost]
         public ActionResult Create(ProductFormViewModel newProduct)
         {
-            if (newProduct != null && newProduct.File != null)
+            
+            if (newProduct != null)
             {
                 var product = Mapper.Map<ProductFormViewModel, Product>(newProduct);
                 productService.CreateProduct(product);
 
-                string productPicture = System.IO.Path.GetFileName(newProduct.File.FileName);
-                string path = System.IO.Path.Combine(Server.MapPath("~/images/"), productPicture);
-                newProduct.File.SaveAs(path);
+                if (newProduct.File != null)
+                {
+                    string productPicture = System.IO.Path.GetFileName(newProduct.File.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/"), productPicture);
+                    newProduct.File.SaveAs(path);
 
-                productService.SaveProduct();
+                    productService.SaveProduct();
+                }
             }
+            
 
             var company = companyService.GetCompany(newProduct.ProductCompany);
             return RedirectToAction("Index", new { company = company.Name });
         }
-
 
     }
 }

@@ -15,7 +15,7 @@ namespace MySample.Services
             this.companyRepository = companyRepository;
         }
 
-        #region ICategoryService Members
+        #region ICompanyService Members
 
         public IEnumerable<Company> GetCompanies(string name = null)
         {

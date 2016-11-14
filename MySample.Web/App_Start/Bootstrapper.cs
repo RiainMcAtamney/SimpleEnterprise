@@ -18,7 +18,7 @@ namespace MySample.Web.App_Start
 
             //Configure AutoMapper
             AutoMapperConfiguration.Configure();
-
+            
         }
 
         private static void SetAutofacContainer()

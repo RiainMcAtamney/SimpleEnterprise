@@ -4,13 +4,13 @@ using System.Data.Entity;
 
 namespace MySample.Data
 {
-    public class MySampleInitialiseDatabase : DropCreateDatabaseIfModelChanges<MySampleContext>
+    public class MySampleInitialiseDatabase : CreateDatabaseIfNotExists<MySampleContext>
     {
         protected override void Seed(MySampleContext context)
         {
             GetCompanies().ForEach(c => context.Companies.Add(c));
 
-            GetProducts().ForEach(p => context.Products.Add(p));       
+            GetProducts().ForEach(p => context.Products.Add(p));
 
             context.SaveChanges();
         }
@@ -21,7 +21,7 @@ namespace MySample.Data
             {
                 new Company {
                     Name = "Neueda",
-                    Location = "Belfast"
+                    Location = "Belfast"                    
                 },
                 new Company {
                     Name = "BT",
@@ -37,17 +37,23 @@ namespace MySample.Data
                 new Product {
                     Name = "Software Development",
                     Description = "Resources for software development.",
-                    Price = 300
+                    Price = 300,
+                    CompanyId = 1,
+                    Image = "neueda.png"
                 },
                 new Product {
                     Name = "Business Analysis",
                     Description = "Resources for business analysis.",
-                    Price = 350
+                    Price = 350,
+                    CompanyId = 1,
+                    Image = "neueda.png"
                 },
                 new Product {
                     Name = "System Architecture",
                     Description = "Resources for system architecture.",
-                    Price = 400
+                    Price = 400,
+                    CompanyId = 2,
+                    Image = "BT.png"
                 },
             };
         }

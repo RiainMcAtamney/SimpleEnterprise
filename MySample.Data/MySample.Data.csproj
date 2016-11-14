@@ -55,6 +55,15 @@
     <Compile Include="Infrastructure\IDbFactory.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
+    <Compile Include="Migrations\201611111439020_InitialCreate.cs" />
+    <Compile Include="Migrations\201611111439020_InitialCreate.Designer.cs">
+      <DependentUpon>201611111439020_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611111443561_AddNewStringField.cs" />
+    <Compile Include="Migrations\201611111443561_AddNewStringField.Designer.cs">
+      <DependentUpon>201611111443561_AddNewStringField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySampleInitialiseDatabase.cs" />
     <Compile Include="MySampleContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,7 +85,14 @@
       <Name>MySample.Business</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611111439020_InitialCreate.resx">
+      <DependentUpon>201611111439020_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611111443561_AddNewStringField.resx">
+      <DependentUpon>201611111443561_AddNewStringField.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
